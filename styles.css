@@ -1,0 +1,644 @@
+/* Kadampa Israel: shared styles. Token names follow design/tokens.json (light theme). */
+
+:root {
+  --surface-100: #faf5ec;
+  --surface-200: #f2e8d8;
+  --hairline: #e2d5c1;
+  --ink: #2b1a16;
+  --ink-muted: #6b5750;
+  --ink-soft: #4a3832; /* not a token: session descriptions on the series page */
+  --saffron: #d05112;
+  --saffron-text: #a83f0c;
+  --action: #b5470f;
+  --on-action: #ffffff;
+  --maroon: #9c282a;
+  --gold: #c9a03a;
+  --lapis: #2f4a7c;
+  --jade: #2f6b52;
+  --lotus: #f3dcd6;
+
+  --radius-md: 12px;
+  --radius-full: 9999px;
+
+  --font-sans: 'Varela Round', Heebo, Arial, sans-serif;
+}
+
+/* ---------- Base ---------- */
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+body {
+  margin: 0;
+  background: var(--surface-100);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 26px;
+}
+
+h1, h2, p, figure, dl, dd { margin: 0; }
+
+:where(a) { color: var(--saffron-text); }
+:where(a:hover) { color: var(--maroon); }
+
+.icon { flex: 0 0 auto; }
+
+/* ---------- Header / nav ---------- */
+
+html { scroll-padding-top: 96px; }
+
+.site-header {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 24px 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+.site-header--wide { max-width: 1232px; }
+.header-bar { border-bottom: 1px solid var(--hairline); }
+.site-top {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--surface-100);
+  transition: box-shadow 0.2s ease;
+}
+.site-top.is-stuck { box-shadow: 0 2px 10px rgba(43, 26, 22, 0.12); }
+
+.logo {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.logo-mark { display: block; }
+.logo-word {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+  line-height: 1;
+}
+.logo-word span { font-size: 20px; line-height: 24px; }
+.logo-word__top { font-weight: 700; color: var(--maroon); }
+.logo-word__bottom { font-weight: 300; color: var(--saffron); }
+
+/* "בהקמה" (under construction) tag */
+.badge {
+  position: absolute;
+  background: #ffffff;
+  color: var(--maroon);
+  font-weight: 700;
+  box-shadow: 0 2px 6px rgba(43, 26, 22, 0.16);
+  white-space: nowrap;
+}
+.badge--tag { /* in flow after the wordmark, raised, so it never sits on the text */
+  position: relative;
+  align-self: flex-start;
+  margin-top: -14px;
+  margin-inline-start: -18px; /* tucks it up over the end of the wordmark */
+  font-size: 12px;
+  line-height: 16px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  transform: rotate(-8deg);
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  align-items: center;
+}
+.nav--center { justify-content: center; }
+.nav-link {
+  color: var(--ink);
+  text-decoration: underline 2px transparent;
+  text-underline-offset: 8px;
+  font-weight: 400;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+.nav-link[aria-current] {
+  color: var(--maroon);
+  text-decoration-color: var(--saffron);
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  font-weight: 700;
+}
+.btn-primary,
+.btn-secondary {
+  min-height: 48px;
+  padding: 0 28px;
+}
+.btn-primary { background: var(--action); color: var(--on-action); }
+.btn-secondary { background: var(--surface-200); color: var(--ink); }
+.btn-outline {
+  min-height: 44px;
+  padding: 0 20px;
+  border: 1.5px solid var(--maroon);
+  color: var(--maroon);
+}
+.btn-light {
+  min-height: 52px;
+  padding: 0 32px;
+  background: var(--surface-100);
+  color: var(--maroon);
+  font-size: 18px;
+}
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 8px;
+}
+.btn-row--center { justify-content: center; }
+.btn-row--end { align-items: center; justify-content: flex-end; }
+
+/* ---------- Sections and layout ---------- */
+
+.section { padding: 96px 24px; }
+.section--band { background: var(--surface-200); }
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+.container--narrow {
+  max-width: 880px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.split {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 56px;
+  align-items: center;
+}
+.stack { display: flex; flex-direction: column; gap: 20px; }
+.stack--16 { gap: 16px; }
+.stack--12 { gap: 12px; }
+.col-main { flex: 999 1 420px; min-width: 0; }
+
+/* ---------- Type ---------- */
+
+.eyebrow {
+  font-size: 13px;
+  line-height: 16px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--maroon);
+}
+.eyebrow--lapis { color: var(--lapis); }
+.eyebrow--jade { color: var(--jade); }
+
+.heading {
+  font-size: 36px;
+  line-height: 44px;
+  font-weight: 700;
+  color: var(--maroon);
+}
+.subheading {
+  font-size: 22px;
+  line-height: 30px;
+  font-weight: 700;
+  color: var(--maroon);
+}
+.body-lg { font-size: 18px; line-height: 30px; }
+.muted { color: var(--ink-muted); }
+
+/* ---------- Media ---------- */
+
+.photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  box-shadow: 0 20px 48px rgba(156, 40, 42, 0.12);
+}
+.photo--strong { box-shadow: 0 20px 48px rgba(156, 40, 42, 0.14); }
+.caption {
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--ink-muted);
+}
+
+/* ---------- Cards ---------- */
+
+.card-lotus {
+  border-radius: var(--radius-md);
+  background: var(--lotus);
+}
+.card-title {
+  font-size: 22px;
+  line-height: 30px;
+  font-weight: 700;
+}
+
+/* ============ Landing page (index.html) ============ */
+
+/* Hero + sunrise */
+.hero {
+  position: relative;
+  padding: 72px 24px 0;
+  text-align: center;
+  overflow-x: clip; /* sun discs are wider than the viewport; vertical glow is allowed to spill, as in the mockup */
+}
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.hero-title {
+  font-size: clamp(40px, 6vw, 64px);
+  line-height: 1.15;
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.hero-lead {
+  font-size: 18px;
+  line-height: 30px;
+  color: var(--ink-muted);
+  max-width: 560px;
+}
+.horizon {
+  position: relative;
+  height: 340px;
+  margin-top: -8px;
+  max-width: 1200px;
+  margin-inline: auto;
+}
+.sun {
+  position: absolute;
+  inset: 0;
+  transform: translateY(300px);
+  transition: transform 3.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.sun.is-risen { transform: translateY(0px); }
+.sun-glow {
+  position: absolute;
+  left: 50%;
+  top: -380px;
+  width: 1400px;
+  height: 1400px;
+  margin-left: -700px;
+  opacity: 0;
+  transition: opacity 3.5s ease-out 0.2s;
+}
+.sun.is-risen .sun-glow { opacity: 1; }
+/* Two layers: a bright corona hugging the disc's visible rim (~46% down this box), and a wide warm sky wash */
+.sun-glow__breath {
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(ellipse 30% 16% at 50% 46%, rgba(255, 204, 120, 0.75) 0%, rgba(255, 178, 90, 0.35) 50%, rgba(255, 178, 90, 0) 100%),
+    radial-gradient(ellipse 50% 34% at 50% 48%, rgba(244, 132, 56, 0.4) 0%, rgba(248, 168, 72, 0.18) 50%, rgba(250, 245, 236, 0) 100%);
+  filter: blur(24px);
+  transform-origin: 50% 46%;
+  animation: kiGlow 6s ease-in-out infinite alternate;
+}
+.sun-disc {
+  position: absolute;
+  left: 50%;
+  border-radius: var(--radius-full);
+}
+.sun-disc--core {
+  top: 120px;
+  width: 900px;
+  height: 900px;
+  margin-left: -450px;
+  background: radial-gradient(circle at 50% 18%, #e0502e 0%, #ea6a32 22%, #f39a3c 44%, #fbc56a 58%, rgba(255, 214, 140, 0.6) 64%, rgba(250, 245, 236, 0) 72%);
+  filter: blur(6px);
+}
+.sun-disc--halo {
+  top: 220px;
+  width: 1100px;
+  height: 1100px;
+  margin-left: -550px;
+  background: radial-gradient(circle at 50% 14%, rgba(224, 80, 46, 0.85) 0%, rgba(236, 122, 53, 0.8) 24%, rgba(247, 169, 64, 0.6) 46%, rgba(250, 245, 236, 0) 70%);
+  filter: blur(4px);
+}
+
+@keyframes kiGlow {
+  from { transform: scale(0.96); opacity: 0.7; }
+  to { transform: scale(1.06); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sun, .sun-glow { transition: none !important; }
+  .sun-glow__breath { animation: none; }
+}
+
+/* About */
+.about {
+  position: relative;
+  z-index: 1;
+  background: var(--surface-100);
+}
+/* Haze over the bottom of the sun so it sinks into the page instead of ending in a hard line */
+.about::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  height: 140px;
+  background: linear-gradient(to bottom, rgba(250, 245, 236, 0), rgba(250, 245, 236, 0.75) 60%, var(--surface-100));
+  pointer-events: none;
+}
+.about-text { flex: 999 1 520px; min-width: 0; }
+.teacher-card {
+  margin-top: 8px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.teacher-card .card-title { color: var(--ink); }
+.about-figure {
+  flex: 1 1 340px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Upcoming series */
+.series-poster {
+  flex: 1 1 340px;
+  min-width: 0;
+  max-width: 460px;
+}
+.series-title {
+  font-size: 44px;
+  line-height: 52px;
+  font-weight: 300;
+  color: var(--ink);
+}
+.session-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.session-chip {
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  background: var(--surface-100);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.session-chip__date { font-size: 13px; line-height: 18px; color: var(--ink-muted); }
+.session-chip__title { font-weight: 700; }
+
+/* December note */
+.note { gap: 16px; }
+.note-text {
+  font-size: clamp(26px, 3.4vw, 36px);
+  line-height: 1.4;
+  font-weight: 300;
+  color: var(--ink);
+}
+.note .btn-outline { margin-top: 8px; font-size: 15px; }
+
+/* Gallery */
+.gallery { padding: 0 24px 96px; }
+.gallery .container { display: flex; flex-direction: column; gap: 32px; }
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+.placeholder {
+  border-radius: var(--radius-md);
+  background: var(--surface-200);
+  border: 1.5px dashed var(--hairline);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--ink-muted);
+}
+.gallery-item--wide { grid-column: 1 / -1; aspect-ratio: 16 / 9; }
+.gallery-item--tall { aspect-ratio: 4 / 5; }
+.gallery-item--landscape { aspect-ratio: 4 / 3; }
+
+/* Join band */
+.join {
+  background: var(--maroon);
+  padding: 80px 24px;
+  color: var(--surface-100);
+}
+.join .container--narrow { gap: 20px; }
+.join-title { font-size: 36px; line-height: 44px; font-weight: 300; }
+.join-lead { font-size: 18px; line-height: 30px; color: var(--lotus); }
+
+/* Footer */
+.site-footer {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 32px 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  color: var(--ink-muted);
+}
+.footer-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.footer-logo .logo-word { flex-direction: column; gap: 0; }
+.footer-logo .logo-word span { font-size: 17px; line-height: 20px; }
+.site-footer--rule { border-top: 1px solid var(--hairline); }
+.footer-link { color: var(--saffron-text); font-weight: 700; }
+
+/* ============ Series page (series.html) ============ */
+
+.series-layout {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 64px 24px 96px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 56px;
+  align-items: flex-start;
+}
+.series-aside {
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 100%;
+  position: sticky;
+  top: 24px;
+}
+.poster-tall {
+  display: block;
+  height: min(calc(100vh - 48px), 760px, calc((100vw - 48px) * 1.25));
+  width: auto;
+  max-width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  box-shadow: 0 20px 48px rgba(156, 40, 42, 0.14);
+}
+.signup {
+  margin-top: 23px;
+  padding: 28px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+  justify-content: space-between;
+}
+.signup__text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1 1 260px;
+  min-width: 0;
+}
+.series-main {
+  flex: 999 1 400px;
+  min-width: 0;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.series-intro { display: flex; flex-direction: column; gap: 14px; }
+.page-title {
+  font-size: clamp(40px, 5vw, 56px);
+  line-height: 1.15;
+  font-weight: 300;
+  color: var(--ink);
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+}
+.fact {
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  background: var(--surface-200);
+}
+.fact dt { font-size: 13px; line-height: 18px; color: var(--ink-muted); }
+.fact dd { font-weight: 700; }
+
+.schedule {
+  list-style: none;
+  margin: 0;
+  padding: 0 20px;
+  border-radius: var(--radius-md);
+  background: #ffffff;
+  border: 1px solid var(--hairline);
+}
+.schedule-item {
+  padding: 18px 0;
+  border-bottom: 1px solid var(--hairline);
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: 16px;
+  align-items: baseline;
+}
+.schedule-item:last-child { border-bottom: 0; }
+.schedule-item__date {
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 700;
+  color: var(--saffron-text);
+  direction: ltr;
+  text-align: right;
+}
+.schedule-item__body { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.schedule-item__title { font-size: 19px; line-height: 26px; font-weight: 700; }
+.schedule-item__desc { font-size: 15px; line-height: 24px; color: var(--ink-soft); }
+
+.teacher-figure { flex: 1 1 300px; min-width: 0; max-width: 400px; }
+.teacher-role { font-size: 22px; line-height: 30px; font-weight: 300; }
+
+/* ============ Mobile ============ */
+
+@media (max-width: 640px) {
+  html { scroll-padding-top: 72px; }
+
+  .site-header {
+    padding: 14px 16px 10px;
+    gap: 10px 12px;
+    justify-content: space-between;
+  }
+  .logo { gap: 8px; }
+  .logo-mark { width: 36px; height: 36px; }
+  .logo-word span { font-size: 17px; line-height: 20px; }
+  .badge--tag { margin-top: -10px; margin-inline-start: -14px; font-size: 11px; line-height: 14px; padding: 2px 6px; }
+
+  /* Phone nav: a full-width segmented bar under the logo */
+  .nav {
+    flex: 1 1 100%;
+    flex-wrap: nowrap;
+    gap: 4px;
+    padding: 4px;
+    border-radius: var(--radius-full);
+    background: var(--surface-200);
+    font-size: 15px;
+  }
+  .nav-link {
+    flex: 1 1 0;
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-full);
+    white-space: nowrap;
+  }
+  .nav-link:active { background: var(--surface-100); }
+  .nav-link[aria-current] {
+    text-decoration-color: transparent;
+    background: #ffffff;
+    box-shadow: 0 1px 4px rgba(43, 26, 22, 0.12);
+  }
+  .nav .btn-outline { display: none; } /* the hero and join sections carry the WhatsApp CTA on phones */
+
+  .section { padding: 56px 16px; }
+  .hero { padding: 40px 16px 0; }
+  .hero-lead { font-size: 17px; line-height: 28px; }
+  .split { gap: 32px; }
+  .join-title { font-size: 28px; line-height: 36px; }
+  .btn-row { gap: 12px; }
+  .site-footer { padding: 24px 16px; justify-content: center; text-align: center; }
+}
