@@ -372,6 +372,9 @@ html { scroll-padding-top: 96px; }
   pointer-events: none;
 }
 .about-text { flex: 999 1 520px; min-width: 0; }
+.about-rows { display: flex; flex-direction: column; gap: 80px; }
+.split--reverse { flex-direction: row-reverse; }
+.about-text .subheading { margin: 12px 0 -10px; }
 .teacher-card {
   margin-top: 8px;
   padding: 24px;
@@ -485,6 +488,8 @@ html { scroll-padding-top: 96px; }
 .footer-logo .logo-word span { font-size: 17px; line-height: 20px; }
 .site-footer--rule { border-top: 1px solid var(--hairline); }
 .footer-link { color: var(--saffron-text); font-weight: 700; }
+/* Black line art on transparent: soften it so it sits quietly beside the muted footer text */
+.footer-nkt img { display: block; width: 96px; height: 96px; opacity: 0.8; }
 
 /* ============ Series page (series.html) ============ */
 
@@ -656,6 +661,7 @@ html { scroll-padding-top: 96px; }
   .hero { padding: 40px 16px 0; }
   .hero-lead { font-size: 17px; line-height: 28px; }
   .split { gap: 32px; }
+  .about-rows { gap: 48px; }
   .join-title { font-size: 28px; line-height: 36px; }
   .btn-row { gap: 12px; }
   .site-footer { padding: 24px 16px; justify-content: center; text-align: center; }
