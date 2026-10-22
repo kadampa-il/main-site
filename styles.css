@@ -384,8 +384,10 @@ html { scroll-padding-top: 96px; }
 }
 .teacher-card .card-title { color: var(--ink); }
 .about-figure {
-  flex: 1 1 340px;
+  flex: 0 1 260px;
   min-width: 0;
+  max-width: 260px;
+  margin-inline: auto;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -393,9 +395,9 @@ html { scroll-padding-top: 96px; }
 
 /* Upcoming series */
 .series-poster {
-  flex: 1 1 340px;
+  flex: 0 1 260px;
   min-width: 0;
-  max-width: 460px;
+  max-width: 260px;
 }
 .series-title {
   font-size: 44px;
@@ -533,8 +535,8 @@ html { scroll-padding-top: 96px; }
   /* Leaves room for the header and the signup card so the whole column stays in view */
   .poster-tall {
     width: auto;
-    height: min(calc(100vh - 360px), 720px);
-    min-height: 360px;
+    height: min(calc(100vh - 360px), 440px);
+    min-height: 320px;
   }
   .series-main { flex: 1 1 400px; }
 }
@@ -612,7 +614,7 @@ html { scroll-padding-top: 96px; }
 .schedule-item__title { font-size: 19px; line-height: 26px; font-weight: 700; }
 .schedule-item__desc { font-size: 15px; line-height: 24px; color: var(--ink-soft); }
 
-.teacher-figure { flex: 1 1 300px; min-width: 0; max-width: 400px; }
+.teacher-figure { flex: 0 1 240px; min-width: 0; max-width: 240px; }
 .teacher-role { font-size: 22px; line-height: 30px; font-weight: 300; }
 
 /* ============ Mobile ============ */
@@ -668,4 +670,19 @@ html { scroll-padding-top: 96px; }
 
   .series-layout { padding: 32px 16px 56px; gap: 32px; }
   .schedule-item { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+}
+
+/* Keep portraits from filling the whole phone screen */
+@media (max-width: 640px) {
+  .about-figure .photo,
+  .series-poster .photo,
+  .teacher-figure .photo,
+  .poster-tall {
+    max-width: min(280px, 72vw);
+    max-height: 55vh;
+    margin-inline: auto;
+  }
+  .about-figure,
+  .series-poster,
+  .teacher-figure { align-items: center; text-align: center; }
 }
