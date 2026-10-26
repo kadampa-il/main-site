@@ -57,3 +57,17 @@
   window.addEventListener('scroll', update, { passive: true });
   update();
 })();
+
+// Logo: the dharma wheel turns on hover and every two minutes, outer rim clockwise, inner hub the other way.
+(function () {
+  var mark = document.querySelector('.site-top .logo-mark');
+  if (!mark) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  function spin() { mark.classList.add('is-spinning'); }
+  mark.querySelector('.wheel-outer').addEventListener('animationend', function () {
+    mark.classList.remove('is-spinning');
+  });
+  mark.closest('.logo').addEventListener('mouseenter', spin);
+  setInterval(spin, 120000);
+})();
