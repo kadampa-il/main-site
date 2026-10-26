@@ -81,6 +81,13 @@ html { scroll-padding-top: 96px; }
   text-decoration: none;
 }
 .logo-mark { display: block; }
+.logo-mark g { transform-box: fill-box; transform-origin: center; }
+.logo-mark.is-spinning .wheel-outer { animation: wheelSpin 6s ease-in-out; }
+.logo-mark.is-spinning .wheel-inner { animation: wheelSpin 3s ease-in-out reverse; }
+@keyframes wheelSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
 .logo-word {
   display: flex;
   flex-direction: row;
@@ -556,7 +563,7 @@ html { scroll-padding-top: 96px; }
   display: flex;
   flex-direction: column;
   gap: 4px;
-  flex: 1 1 260px;
+  flex: 1 1 auto;
   min-width: 0;
 }
 .series-main {
