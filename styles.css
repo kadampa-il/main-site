@@ -549,6 +549,9 @@ html { scroll-padding-top: 96px; }
   align-items: center;
   justify-content: space-between;
 }
+.signup .btn {
+  margin-inline-start: auto;
+}
 .signup__text {
   display: flex;
   flex-direction: column;

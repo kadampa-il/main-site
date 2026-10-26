@@ -1,6 +1,6 @@
 # Kadampa Israel website
 
-Plain static site (Hebrew, RTL): landing page plus the "אהבה עמוקה" series page. No build step, no dependencies.
+Plain static site (Hebrew, RTL): landing page plus the "איך לפתוח את הלב?" series page. No build step, no dependencies.
 
 Run: open `index.html` directly, or serve the folder with `python3 -m http.server` and visit http://localhost:8000.
 
