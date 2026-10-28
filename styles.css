@@ -264,11 +264,17 @@ html { scroll-padding-top: 96px; }
 /* ============ Landing page (index.html) ============ */
 
 /* Hero + sunrise */
+/* The hero fills the first screen under the sticky header so Buddha's eyes always land just above the fold */
 .hero {
+  --top-h: 102px;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  min-height: calc(100svh - var(--top-h));
   padding: 72px 24px 0;
   text-align: center;
-  overflow-x: clip; /* sun discs are wider than the viewport; vertical glow is allowed to spill, as in the mockup */
+  overflow-x: clip; /* the glow is wider than the viewport; it is allowed to spill vertically */
 }
 .hero-inner {
   position: relative;
@@ -280,6 +286,16 @@ html { scroll-padding-top: 96px; }
   align-items: center;
   gap: 20px;
 }
+/* Soft wash of the page color behind the text, so it stays readable where the head rises behind it */
+.hero-inner::before {
+  content: '';
+  position: absolute;
+  inset: -48px -96px -32px;
+  z-index: -1;
+  background: radial-gradient(closest-side, rgba(250, 245, 236, 0.82), rgba(250, 245, 236, 0.6) 65%, rgba(250, 245, 236, 0));
+  pointer-events: none;
+}
+.hero-title, .hero-lead { text-shadow: 0 0 12px var(--surface-100), 0 0 4px var(--surface-100); }
 .hero-title {
   font-size: clamp(40px, 6vw, 64px);
   line-height: 1.15;
@@ -293,32 +309,34 @@ html { scroll-padding-top: 96px; }
   color: var(--ink-muted);
   max-width: 560px;
 }
+/* Takes whatever height is left under the text; the head is anchored to its bottom and may rise up behind the text */
 .horizon {
+  --head-w: min(90vw, 900px, (100svh - var(--top-h)) * 0.85);
   position: relative;
-  height: 340px;
-  margin-top: -8px;
+  flex: 1 0 calc(var(--head-w) * 0.45);
+  width: 100%;
   max-width: 1200px;
   margin-inline: auto;
 }
 .sun {
   position: absolute;
   inset: 0;
-  transform: translateY(300px);
-  transition: transform 3.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+  transform: translateY(calc(var(--head-w) * 1.2)); /* starts fully below the horizon */
+  transition: transform 6s cubic-bezier(0.33, 0, 0.2, 1);
 }
 .sun.is-risen { transform: translateY(0px); }
 .sun-glow {
   position: absolute;
   left: 50%;
-  top: -380px;
+  bottom: calc(var(--head-w) * 0.45 - 756px); /* centers the corona (46% down the box) on the head */
   width: 1400px;
   height: 1400px;
   margin-left: -700px;
   opacity: 0;
-  transition: opacity 3.5s ease-out 0.2s;
+  transition: opacity 5s ease-out 0.5s;
 }
 .sun.is-risen .sun-glow { opacity: 1; }
-/* Two layers: a bright corona hugging the disc's visible rim (~46% down this box), and a wide warm sky wash */
+/* Two layers: a bright corona around the head (~46% down this box), and a wide warm sky wash */
 .sun-glow__breath {
   width: 100%;
   height: 100%;
@@ -329,26 +347,14 @@ html { scroll-padding-top: 96px; }
   transform-origin: 50% 46%;
   animation: kiGlow 6s ease-in-out infinite alternate;
 }
-.sun-disc {
+/* Buddha's head rises until his eyes are just above the horizon (the top of .about) */
+.sun-head {
   position: absolute;
   left: 50%;
-  border-radius: var(--radius-full);
-}
-.sun-disc--core {
-  top: 120px;
-  width: 900px;
-  height: 900px;
-  margin-left: -450px;
-  background: radial-gradient(circle at 50% 18%, #e0502e 0%, #ea6a32 22%, #f39a3c 44%, #fbc56a 58%, rgba(255, 214, 140, 0.6) 64%, rgba(250, 245, 236, 0) 72%);
-  filter: blur(6px);
-}
-.sun-disc--halo {
-  top: 220px;
-  width: 1100px;
-  height: 1100px;
-  margin-left: -550px;
-  background: radial-gradient(circle at 50% 14%, rgba(224, 80, 46, 0.85) 0%, rgba(236, 122, 53, 0.8) 24%, rgba(247, 169, 64, 0.6) 46%, rgba(250, 245, 236, 0) 70%);
-  filter: blur(4px);
+  bottom: calc(var(--head-w) * -0.17);
+  width: var(--head-w);
+  height: auto;
+  margin-left: calc(var(--head-w) / -2);
 }
 
 @keyframes kiGlow {
@@ -367,14 +373,14 @@ html { scroll-padding-top: 96px; }
   z-index: 1;
   background: var(--surface-100);
 }
-/* Haze over the bottom of the sun so it sinks into the page instead of ending in a hard line */
+/* Short haze over the bottom of the head so it sinks into the page without veiling the eyes */
 .about::before {
   content: '';
   position: absolute;
   left: 0;
   right: 0;
   bottom: 100%;
-  height: 140px;
+  height: 28px;
   background: linear-gradient(to bottom, rgba(250, 245, 236, 0), rgba(250, 245, 236, 0.75) 60%, var(--surface-100));
   pointer-events: none;
 }
@@ -670,7 +676,7 @@ html { scroll-padding-top: 96px; }
   .nav .btn-outline { display: none; } /* the hero and join sections carry the WhatsApp CTA on phones */
 
   .section { padding: 56px 16px; }
-  .hero { padding: 40px 16px 0; }
+  .hero { --top-h: 114px; padding: 40px 16px 0; }
   .hero-lead { font-size: 17px; line-height: 28px; }
   .split { gap: 32px; }
   .about-rows { gap: 48px; }
